@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "WebHWApp"
 version = "0.0.1"
-description = "FastAPI HW app"
+description = "FastAPI app"
 authors = ["Vorobev Vyacheslav"]
 license = "MIT"
 
