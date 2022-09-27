@@ -3,10 +3,6 @@ import re
 from app.db import db
 
 
-def get_user(user_id: int):
-    return {"user_id": user_id, "login": "login_{0}".format(user_id)}
-
-
 def add_user(login: str, password: str):
     if db.user_with_login_exists(login):
         return {"error": "such login exists"}
@@ -17,6 +13,8 @@ def add_user(login: str, password: str):
 
 
 def password_is_strong(password: str):
+    if len(password) < 8:
+        return False
     number_pattern = re.compile(r"\d")
     if not number_pattern.search(password):
         return False

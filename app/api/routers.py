@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+from app.models import model
 from app.models.course import course
 from app.models.user import user
 
@@ -23,7 +24,7 @@ async def get_all_user_courses(user_login: str, user_password: str):
 @router.get("/courses/all")
 async def get_all_courses():
     """Get all courses."""
-    return course.get_all_courses()
+    return {"courses": course.get_all_courses()}
 
 
 @router.get("/users/courses/{course_id}")
@@ -35,18 +36,18 @@ async def get_user_course(user_login: str, user_password: str, course_id: int):
 
 
 @router.post("/users/sign_up")
-async def add_user(user_login: str, user_password: str):
+async def add_user(user_auth: model.UserAuth):
     """Add user."""
-    result = user.add_user(user_login, user_password)
+    result = user.add_user(user_auth.login, user_auth.password)
     return result
 
 
-@router.post("/users/courses/add")
-async def add_user(user_login: str, user_password: str, course_id: int):
+@router.post("/users/courses/add/{course_id}")
+async def add_course(user_auth: model.UserAuth, course_id: int):
     """Add course to user."""
-    if not user.check_login_password(user_login, user_password):
+    if not user.check_login_password(user_auth.login, user_auth.password):
         return get_error("Incorrect login or password")
-    return user.add_course(user_login, course_id)
+    return user.add_course(user_auth.login, course_id)
 
 
 def get_error(msg: str):

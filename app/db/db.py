@@ -3,13 +3,13 @@ from typing import List
 from app.models import model
 
 db = {
-    "users": [model.User(login="dev", password="admin", user_id=1, courses=[1])],
+    "users": [],
     "courses": [
         model.Course(name="Python web", course_id=1, description="good"),
         model.Course(name="Haskell", course_id=2, description="\\x -> x * x"),
     ],
+    "ids": {"users": 1, "courses": 2},
 }
-db_ids = {"users": 1, "courses": 0}
 
 
 def get_all_users() -> List[model.User]:
@@ -29,9 +29,9 @@ def user_with_login_exists(login: str) -> bool:
 
 
 def add_user(login: str, password: str) -> model.User:
-    user_id = db_ids["users"]
+    user_id = db["ids"]["users"]
     user_id += 1
-    db_ids["users"] = user_id
+    db["ids"]["users"] = user_id
     new_user = model.User(login=login, password=password, user_id=user_id, courses=[])
     get_all_users().append(new_user)
     return new_user
@@ -46,9 +46,9 @@ def user_exists(login: str, password: str) -> bool:
 
 
 def add_course(name: str, description: str) -> model.Course:
-    course_id = db_ids["courses"]
+    course_id = db["ids"]["courses"]
     course_id += 1
-    db_ids["course"] = course_id
+    db["ids"]["course"] = course_id
     new_course = model.Course(name=name, course_id=course_id, description=description)
     get_all_courses().append(new_course)
     return new_course
