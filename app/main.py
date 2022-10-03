@@ -2,7 +2,7 @@ import time
 
 from fastapi import FastAPI, Request
 
-from app.routers import router
+from app.api.routers import router
 
 app = FastAPI(
     title="BaseApp",
