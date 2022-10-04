@@ -25,3 +25,13 @@ class Course(BaseModel):
     name: str
     course_id: int
     description: str
+
+
+class Task(BaseModel):
+    """Task Class"""
+
+    id: int
+    description: str
+    course_id: int
+    login: str
+    score: int
