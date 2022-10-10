@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from app.models import model
 
@@ -63,7 +63,7 @@ def get_courses(ids: List[int]) -> List[model.Course]:
     return ans
 
 
-def get_user(login: str) -> model.User:
+def get_user(login: str) -> Optional[model.User]:
     users = get_all_users()
     for u in users:
         if u.login == login:

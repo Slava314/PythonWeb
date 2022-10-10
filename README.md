@@ -10,3 +10,4 @@ Simple education platform with courses.
 
 # Tests
 Can run test with command `python3.10 -m unittest discover app/test`
+Can run grpc server test from `grpc_tasks` with command `python3.9 -m unittest discover test`
